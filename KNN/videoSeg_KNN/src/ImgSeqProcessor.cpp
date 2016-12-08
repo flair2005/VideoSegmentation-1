@@ -145,8 +145,8 @@ void ImgSeqProcessor::processImgSeq() {
         imshow("Frame", frame);
 
         Dilate(fgMaskKNN, 0,1);
-        Dilate(fgMaskKNN, 0,4);
-//        Erode(fgMaskKNN, 1,2);
+        Dilate(fgMaskKNN, 0,2);
+        Erode(fgMaskKNN, 1,2);
 //        Erode(fgMaskKNN, 1,1);
 
         FindContours(fgMaskKNN, frame);
