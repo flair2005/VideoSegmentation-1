@@ -18,7 +18,8 @@ def LinearRegression(flow):
     # print Y_v
     reg_u.fit(X, Y_u)
     reg_v.fit(X, Y_v)
-    print reg_u.score(X,Y_u), reg_v.score(X,Y_v)
+    # print reg_u.score(X,Y_u), reg_v.score(X,Y_v)
     pred_u = reg_u.predict(X)
     pred_v = reg_v.predict(X)
+    residual = np.power(pred_u - Y_u, 2) + np.power(pred_v - Y_v, 2)
     pass
