@@ -1,5 +1,5 @@
-INCLUDE_OPENCV = `$(PREFIX)pkg-config --cflags opencv`
-LIBS_OPENCV = `$(PREFIX)pkg-config --libs opencv`
+LIBS_OPENCV = `$(prefix)pkg-config --libs opencv`
+INCLUDE_OPENCV = `$(prefix)pkg-config --cflags opencv`
 DIR_BIN = ./bin
 DIR_INC = ./include
 DIR_SRC = ./src
@@ -16,12 +16,12 @@ SRC_ISP = $(DIR_SRC)/$(ISP).cpp
 MDB = myDirBrowser
 OBJ_MDB = $(DIR_OBJ)/$(MDB).o
 
-CFLAGS = -g -ggdb -O3 -I$(DIR_INC)
+CFLAGS = -O3 -pedantic -I$(DIR_INC)
 
 CC = g++
 
-$(BIN_TARGET):$(SRC_TARGET)
+$(BIN_TARGET):$(SRC_TARGET) $(OBJ_ISP) $(OBJ_MDB) 
 	$(CC) -o $@ $(CFLAGS) $(INCLUDE_OPENCV) $(SRC_TARGET) $(OBJ_ISP) $(OBJ_MDB) $(LIBS_OPENCV)
 
-$(OBJ_ISP):$(SRC_ISP)
+$(OBJ_ISP):$(SRC_ISP) $(OBJ_MDB)
 	$(CC) -o $(OBJ_ISP) -c $(CFLAGS) $(INCLUDE_OPENCV) $(SRC_ISP) $(OBJ_MDB) $(LIBS_OPENCV)
