@@ -87,9 +87,10 @@ if __name__ == '__main__':
                     poly_sigma=1.5, flags=cv2.OPTFLOW_LK_GET_MIN_EIGENVALS)  # Farnback光流法
             prevgray = gray  # 计算完光流后，将当前帧存储为下一次计算的前一帧
 
-            me.LinearRegression(flow)
+            residual = me.LinearRegression(flow)
 
             cv2.imshow('flow', draw_flow(gray, flow))
+            cv2.imshow("residual", residual)
             # cv2.imshow("mod flow", Mod_flow(flow))
             if show_hsv:
                 cv2.imshow('flow HSV', draw_hsv(flow))

@@ -1,5 +1,6 @@
 # encoding:utf-8
 import numpy as np
+import cv2
 from sklearn import linear_model
 
 def LinearRegression(flow):
@@ -22,4 +23,4 @@ def LinearRegression(flow):
     pred_u = reg_u.predict(X)
     pred_v = reg_v.predict(X)
     residual = np.power(pred_u - Y_u, 2) + np.power(pred_v - Y_v, 2)
-    pass
+    return cv2.convertScaleAbs(residual,alpha=1,beta=0)
