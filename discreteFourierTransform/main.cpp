@@ -16,7 +16,7 @@ bool Dft(Mat src, Mat &magI)
     Mat src_gray;
     cvtColor(src,src_gray,CV_RGB2GRAY);//灰度图像做傅里叶变换
 
-    int m = getOptimalDFTSize(src_gray.rows);//2,3,5的倍数有更高效率的傅里叶转换
+    int m = getOptimalDFTSize(src_gray.rows);//获取最适合做离散傅氏变换的图像尺寸，如2、3、5的倍数有更高效率的傅里叶转换
     int n = getOptimalDFTSize(src_gray.cols);
 
     Mat dst;
@@ -55,7 +55,7 @@ bool Dft(Mat src, Mat &magI)
     int cy = magI.rows/2;
 
     Mat tmp;
-    Mat q0(magI,Rect(0,0,cx,cy));
+    Mat q0(magI,Rect(0,0,cx,cy));//以此种方式构造Mat对象，q0仅指向magI图像的一个Rect区域，没有任何数据复制的操作
     Mat q1(magI,Rect(cx,0,cx,cy));
     Mat q2(magI,Rect(0,cy,cx,cy));
     Mat q3(magI,Rect(cx,cy,cx,cy));
