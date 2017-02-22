@@ -1,6 +1,6 @@
 #include "ImgSeqProcessor.h"
 
-ImgSeqProcessor::ImgSeqProcessor(string _DirPath):DirPath(_DirPath)
+ImgSeqProcessor::ImgSeqProcessor(string _DirPath):DirPath(_DirPath),rectDirCount(0),n_frame(0)
 {
     //create Background Subtractor objects
     pMOG2 = createBackgroundSubtractorMOG2(); //MOG2 approach
@@ -17,6 +17,7 @@ bool ImgSeqProcessor::ReadNextFrame(Mat &frame)
     frame = imread(framePath, CV_8UC1);
     if(!frame.data)
         return false;
+    n_frame+=1;
     return true;
 }
 
@@ -54,6 +55,30 @@ bool ImgSeqProcessor::Erode(Mat &workMat, int erosion_elem, int erosion_size)
     return true;
 }
 
+string itos(int l)
+{
+    ostringstream os;
+    os<<l;
+    string result;
+    istringstream is(os.str());
+    is>>result;
+    return result;
+
+}
+
+void ImgSeqProcessor::saveBoundingRect(const Rect& r, const int r_num)
+{
+    if(0 == r_num)
+    {
+        curr_frameDir = m_DB.GetDirPath()+"/"+itos(rectDirCount);
+        rectDirCount+=1;
+        std::cout<<curr_frameDir<<std::endl;
+        m_DB.CreateDirectory(curr_frameDir);
+    }
+    std::string subframe_path = curr_frameDir+"/"+itos(r_num)+".png";
+    imwrite(subframe_path, Mat(frame, r));
+}
+
 bool ImgSeqProcessor::FindContours(Mat inArr, Mat &outArr)
 {
     // find
@@ -64,13 +89,19 @@ bool ImgSeqProcessor::FindContours(Mat inArr, Mat &outArr)
     // draw
     Mat result(tmpMat.size(),CV_8U,Scalar(0));
     drawContours(result,contoursPoint,-1,Scalar(255),1);
+    // 清空上一帧boundingRect
+    v_boundingRect.clear();
     // 轮廓表示为一个矩形
+    int t_nrect = 0; //记录满足尺寸要求的矩形数量
     for(int i=0;i<contoursPoint.size();i++)
     {
 //        Rect r = boundingRect(Mat(*it));
         Rect r = boundingRect(Mat(contoursPoint[i]));
+//        v_boundingRect.push_back(r);
         if(!(r.width<7||r.height<7))
+            saveBoundingRect(r, t_nrect);
             rectangle(outArr, r, Scalar(255), 1);
+            t_nrect+=1;
     }
     return true;
 }
@@ -122,7 +153,7 @@ void ImgSeqProcessor::processVideo() {
             cvReleaseImage(&fgMaskMOG2_ip);
         }
         //get the input from the keyboard
-        keyboard = waitKey( 30 );
+        keyboard = waitKey(1);
     }
     //delete capture object
     capture.release();
@@ -152,14 +183,15 @@ void ImgSeqProcessor::processImgSeq() {
 
         FindContours(fgMaskMOG2, frame);
 
-        imshow("FG Mask MOG 2", fgMaskMOG2);
-        imshow("tracing img", frame);
+//        imshow("FG Mask MOG 2", fgMaskMOG2);
+//        imshow("tracing img", frame);
         //save frame as jpg
 //        if ((char)keyboard != 's')
 //        {
 //            imwrite("src.jpg", frame);
 //        }
         //get the input from the keyboard
-        keyboard = waitKey( 1000 );
+//        keyboard = waitKey( 1000 );
+        keyboard = waitKey(1);
     }
 }

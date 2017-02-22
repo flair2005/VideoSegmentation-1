@@ -23,7 +23,9 @@ class myDirBrowser
         void PrintAllFilesName();
         std::string GetNextFramePath();
         bool GetNextFramePath(std::string *outFilePath);
+        int CreateDirectory(std::string dirPath);
         inline bool IsLastFrame(){ return m_currentFrame>=(m_files.size()) ? true : false; };
+        inline string GetDirPath(){return m_dirPath;}
 
     private:
         /*文件夹路径*/

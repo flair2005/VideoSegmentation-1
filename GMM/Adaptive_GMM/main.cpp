@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[])
 {
-    ImgSeqProcessor imp("/home/yangzheng/testData/ucsd/vidf1_33_001.y");
+    ImgSeqProcessor imp("/home/yangzheng/testData/ucsd/vidf5_33_005.y_back");
     imp.processImgSeq();
 
     //destroy GUI windows

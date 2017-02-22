@@ -16,7 +16,7 @@ SRC_ISP = $(DIR_SRC)/$(ISP).cpp
 MDB = myDirBrowser
 OBJ_MDB = $(DIR_OBJ)/$(MDB).o
 
-CFLAGS = -O3 -pedantic -I$(DIR_INC)
+CFLAGS = -O3 -ggdb -pedantic -I$(DIR_INC)
 
 CC = g++
 

@@ -30,8 +30,8 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/ImgSeqProcessor.h" />
+		<Unit filename="include/myDirBrowser.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="myDirBrowser.h" />
 		<Unit filename="src/ImgSeqProcessor.cpp" />
 		<Extensions>
 			<envvars />
