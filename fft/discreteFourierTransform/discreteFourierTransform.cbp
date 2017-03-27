@@ -28,7 +28,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../KNN/videoSeg_KNN_FFT/videoSeg_KNN.cbp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<envvars />
