@@ -21,6 +21,8 @@ CFLAGS = -O3 -ggdb -pedantic -I$(DIR_INC)
 CC = g++
 
 $(BIN_TARGET):$(SRC_TARGET) $(OBJ_ISP) $(OBJ_MDB) 
+	#mkdir bin
+	if [ ! -f $DIR_BIN ]; then mkdir bin;fi
 	$(CC) -o $@ $(CFLAGS) $(INCLUDE_OPENCV) $(SRC_TARGET) $(OBJ_ISP) $(OBJ_MDB) $(LIBS_OPENCV)
 
 $(OBJ_ISP):$(SRC_ISP) $(OBJ_MDB)
