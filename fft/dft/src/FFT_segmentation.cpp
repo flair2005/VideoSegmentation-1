@@ -68,8 +68,8 @@ void FFT_segmentation::normalize(IplImage *src, IplImage *dst){
     // Localize minimum and maximum values
     cvMinMaxLoc( src, &minVal, &maxVal );
     // Normalize image (0 - 255) to be observed as an u8 image
-    scale = 255/(maxVal - minVal);
-    shift = -minVal * scale;
+    double scale = 255/(maxVal - minVal);
+    double shift = -minVal * scale;
     cvConvertScale(src, dst, scale, shift);
 }
 
@@ -88,7 +88,8 @@ void FFT_segmentation::compute_spectrogram(IplImage *src,  IplImage *dst){
     cvPow( image_Im, image_Im, 2.0);
     cvAdd( image_Re, image_Im, image_Re);
     cvPow( image_Re, dst, 0.5 );
-    cvReleaseImage(image_Re, image_Im);
+    cvReleaseImage(&image_Re);
+    cvReleaseImage(&image_Im);
 }
 /*截取不同频率的子图像*/
 void FFT_segmentation::segmentation(IplImage *src,vec_images *vimgs){
