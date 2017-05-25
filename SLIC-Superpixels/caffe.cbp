@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="caffe" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="./caffe" prefix_auto="1" extension_auto="1" />
+				<Option object_output="./" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-g" />
+			<Add option="-DUSE_OPENCV" />
+			<Add option="-DUSE_LEVELDB" />
+			<Add option="-DUSE_LMDB" />
+			<Add directory="/home/yangzheng/Libs/caffe/include" />
+			<Add directory="/home/yangzheng/Libs/caffe/build/src" />
+			<Add directory="/usr/include" />
+			<Add directory="/usr/include/opencv" />
+			<Add directory="/usr/local/include" />
+			<Add directory="/usr/local/cuda/include" />
+		</Compiler>
+		<Linker>
+			<Add option="-pthread -lcaffe -lglog" />
+			<Add option="-lgflags -lprotobuf -lboost_system" />
+			<Add option="-lboost_filesystem -lboost_thread" />
+			<Add option="-lhdf5_hl -lhdf5" />
+			<Add option="-lleveldb -lsnappy -llmdb  -lm" />
+			<Add option="-lstdc++" />
+			<Add option="-lcblas -latlas" />
+			<Add option="-lopencv_cudabgsegm -lopencv_cudaobjdetect -lopencv_cudastereo -lopencv_stitching -lopencv_cudafeatures2d -lopencv_superres -lopencv_cudacodec -lopencv_videostab -lopencv_cudaoptflow -lopencv_cudalegacy -lopencv_cudawarping -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn -lopencv_dpm -lopencv_fuzzy -lopencv_line_descriptor -lopencv_optflow -lopencv_plot -lopencv_reg -lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_rgbd -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_text -lopencv_face -lopencv_xfeatures2d -lopencv_shape -lopencv_video -lopencv_ximgproc -lopencv_calib3d -lopencv_features2d -lopencv_flann -lopencv_xobjdetect -lopencv_objdetect -lopencv_ml -lopencv_xphoto -lopencv_highgui -lopencv_videoio -lopencv_photo -lopencv_imgcodecs -lopencv_cudaimgproc -lopencv_cudafilters -lopencv_imgproc -lopencv_cudaarithm -lopencv_core -lopencv_cudev" />
+			<Add directory="/home/yangzheng/Libs/caffe/build/lib" />
+			<Add directory="/home/yangzheng/Libs/caffe/build" />
+			<Add directory="/usr/lib" />
+			<Add directory="/usr/local/lib" />
+			<Add directory="/usr/local/cuda/lib64" />
+		</Linker>
+		<Unit filename="slic.cpp" />
+		<Unit filename="slic.h" />
+		<Unit filename="test_slic.cpp" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
